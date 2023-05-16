@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+
+// Define function to handle user input and generate chatbot response
+std::string getResponse(std::string input) {
+    std::string response;
+    
+    // Define a map to hold chatbot responses for specific keywords
+    std::map<std::string, std::string> responses = {
+        {"hello", "Hi there! How can I assist you?"},
+        {"goodbye", "Goodbye! Have a great day."},
+        {"thanks", "You're welcome!"},
+        {"help", "How can I help you?"}
+    };
+    
+    // Check if the input matches any of the response keywords
+    for (auto const& [key, value] : responses) {
+        if (input.find(key) != std::string::npos) {
+            response = value;
+            break;
+        }
+    }
+    
+    // If no specific response is found, provide a default response
+    if (response.empty()) {
+        response = "I'm sorry, I don't understand. Can you please rephrase?";
+    }
+    
+    return response;
+}
+
+// Define main function to prompt for user input and generate chatbot response
+int main() {
+    std::string input;
+    std::cout << "Hello! I'm a chatbot. How can I assist you today?" << std::endl;
+    while (true) {
+        std::cout << "User: ";
+        std::getline(std::cin, input);
+        if (input == "exit") {
+            break;
+        }
+        std::string response = getResponse(input);
+        std::cout << "Chatbot: " << response << std::endl;
+    }
+    return 0;
+}
